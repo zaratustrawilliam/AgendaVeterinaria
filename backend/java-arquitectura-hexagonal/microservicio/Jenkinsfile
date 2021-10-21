@@ -1,7 +1,7 @@
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
-    label 'Slave4_Induccion'
+    label 'Slave_Induccion'
   }
 
   //Opciones específicas de Pipeline dentro del Pipeline
@@ -17,7 +17,6 @@ pipeline {
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
     jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
-    gradle 'Gradle6.9_Centos'
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -39,16 +38,15 @@ pipeline {
       }
     }
 
-    stage('Compile') {
+    stage('Clean') {
       steps{
         echo "------------>Compile<------------"
-        //sh 'chmod +x gradlew'
-        //sh './gradlew --b ./build.gradle test'
         sh 'pwd'
 
         dir("${PROJECT_PATH_BACK}")
         {
-        	sh 'gradle build -x test'
+        	sh 'chmod +x gradlew'
+            sh 'gradlew --b build.gradle clean'
         }
       }
     }
@@ -62,7 +60,7 @@ pipeline {
 
             dir("${PROJECT_PATH_BACK}")
             {
-            	sh 'gradle build test'
+            	sh 'gradlew --b build.gradle test'
             }
           }
         }
@@ -76,6 +74,18 @@ pipeline {
       }
     }
 
+    stage('Build') {
+          steps{
+            echo "------------>Compile<------------"
+            sh 'pwd'
+
+            dir("${PROJECT_PATH_BACK}")
+            {
+                sh 'gradlew --b build.gradle build'
+            }
+          }
+     }
+
   }
 
   post {
@@ -85,7 +95,8 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'build/test-results/test/*.xml'
+      //junit 'build/test-results/test/*.xml'
+      junit '**/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
     }
     failure {
       echo 'This will run only if failed'
