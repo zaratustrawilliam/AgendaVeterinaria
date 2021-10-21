@@ -1,0 +1,22 @@
+spring:
+   datasource:
+      driver-class-name: org.h2.Driver
+      jdbcUrl: jdbc:h2:mem:testdb
+      username: root
+      password:
+
+   jpa:
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.H2Dialect
+      hibernate:
+         connection:
+            providerClass: com.zaxxer.hikari.hibernate.HikariConnectionProvider
+         ddlAuto: none
+      showSql: true
+      openInView: false
+
+persistencia:
+   type: jpa
+
+
