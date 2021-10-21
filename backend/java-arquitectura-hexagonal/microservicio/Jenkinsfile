@@ -34,14 +34,6 @@ pipeline {
       }
     }
 
-    stage('Clean') {
-          steps{
-            echo "------------>Clean<------------"
-            sh 'chmod +x gradlew'
-            sh './gradlew --b ./gradle clean'
-      }
-    }
-
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
