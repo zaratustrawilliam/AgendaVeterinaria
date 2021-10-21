@@ -26,6 +26,5 @@ build
 /.nb-gradle/
 bin/
 logs
-.metadata
 # gradle/
 

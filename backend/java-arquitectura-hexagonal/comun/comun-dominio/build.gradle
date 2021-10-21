@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-sourceCompatibility = '16.0.2'
+sourceCompatibility = "${javaVersion}"
 
 repositories {
 	mavenCentral()
