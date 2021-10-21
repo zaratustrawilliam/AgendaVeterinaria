@@ -1,7 +1,7 @@
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
-    label 'Slave_Induccion'
+    label 'Slave4_Induccion'
   }
 
   //Opciones específicas de Pipeline dentro del Pipeline
@@ -10,9 +10,14 @@ pipeline {
  	disableConcurrentBuilds()
   }
 
+  environment {
+          PROJECT_PATH_BACK = './backend/java-arquitectura-hexagonal/microservicio/'
+  }
+
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
     jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
+    gradle 'Gradle5.0_Centos'
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -37,8 +42,14 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
+        //sh 'chmod +x gradlew'
+        //sh './gradlew --b ./build.gradle test'
+        sh 'pwd'
+
+        dir("${PROJECT_PATH_BACK}")
+        {
+        	sh 'gradle build test'
+        }
       }
     }
 
@@ -46,7 +57,7 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-        sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+        sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=./backend/java-arquitectura-hexagonal/microservicio/sonar-project.properties"
         }
       }
     }
@@ -54,7 +65,11 @@ pipeline {
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh './gradlew --b ./build.gradle build -x test'
+        //sh './gradlew --b ./build.gradle build -x test'
+        dir("${PROJECT_PATH_BACK}")
+        {
+                	sh 'gradle build -x test'
+        }
       }
     }
   }
