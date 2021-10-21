@@ -13,19 +13,19 @@ allprojects {
 									"org.apache.commons:commons-lang3:3.7"
 								]
 	
-	project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:${springBootVersion}"]
-	project.ext.springdevtools = ["org.springframework.boot:spring-boot-devtools:${springBootVersion}"]
+	project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:2.5.3"]
+	project.ext.springdevtools = ["org.springframework.boot:spring-boot-devtools:2.5.3"]
 	
-	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"]
+	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:2.5.3"]
 	
 	project.ext.springtxt = [
-							  	"org.springframework:spring-tx:${springVersion}",
-							  	"org.springframework:spring-context:${springVersion}"
+							  	"org.springframework:spring-tx:5.3.9",
+							  	"org.springframework:spring-context:5.3.9"
 							]
 	
 	project.ext.springbootjasypt = ['com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1']
 
-	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
+	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:2.5.3"]
 	// Se excluye JUnit 4
 	configurations {
 		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -34,5 +34,5 @@ allprojects {
 	project.ext.h2 = ["com.h2database:h2:1.4.200"]
 	project.ext.actuator=["org.springframework.boot:spring-boot-starter-actuator:2.1.6.RELEASE"]
 
-	project.ext.jpa = ["org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"]
+	project.ext.jpa = ["org.springframework.boot:spring-boot-starter-data-jpa:2.5.3"]
 }

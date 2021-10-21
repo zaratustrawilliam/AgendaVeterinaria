@@ -3,13 +3,13 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.3")
 		classpath 'org.owasp:dependency-check-gradle:6.2.2'
 	}
 }
 
 plugins {
-	id 'org.springframework.boot' version  "${springBootVersion}"
+	id 'org.springframework.boot' version  "2.5.3"
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'info.solidsoft.pitest' version '1.7.0'
@@ -35,10 +35,10 @@ allprojects {
 	project.ext.mockitojupiter = ['org.mockito:mockito-junit-jupiter:3.11.2']
 	project.ext.lombok = ["org.projectlombok:lombok:1.18.20"]
 	
-	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
-	project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:${springBootVersion}"]
-	project.ext.springdevtools = ["org.springframework.boot:spring-boot-devtools:${springBootVersion}"]
-	project.ext.springbootundertow = ["org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}"]
+	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:2.5.3"]
+	project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:2.5.3"]
+	project.ext.springdevtools = ["org.springframework.boot:spring-boot-devtools:2.5.3"]
+	project.ext.springbootundertow = ["org.springframework.boot:spring-boot-starter-undertow:2.5.3"]
 	project.ext.springbootjasypt = ['com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1']
 	project.ext.hibernate = ["org.hibernate:hibernate-core:5.6.0.Final"]
 
@@ -48,8 +48,8 @@ allprojects {
 	}
 	
 	project.ext.springtxt = [
-							  	"org.springframework:spring-tx:${springVersion}",
-							  	"org.springframework:spring-context:${springVersion}"
+							  	"org.springframework:spring-tx:5.3.9",
+							  	"org.springframework:spring-context:5.3.9"
 							]
 
 	project.ext.swagger = [
@@ -59,18 +59,18 @@ allprojects {
 
 	project.ext.db = [""]
 
-	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"]
+	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:2.5.3"]
 	project.ext.flyway = ["org.flywaydb:flyway-core:5.2.1"]
 	project.ext.flywaytest = ["org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1"]
 
 	project.ext.h2 = ["com.h2database:h2:1.4.200"]
 
-	project.ext.jpa = ["org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"]
+	project.ext.jpa = ["org.springframework.boot:spring-boot-starter-data-jpa:2.5.3"]
 }
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = "${javaVersion}"
+sourceCompatibility = "1.8"
 
 repositories {
 	mavenCentral()
