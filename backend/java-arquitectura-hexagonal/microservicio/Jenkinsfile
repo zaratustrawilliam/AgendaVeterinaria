@@ -45,8 +45,8 @@ pipeline {
 
         dir("${PROJECT_PATH_BACK}")
         {
-        	sh 'chmod +x gradlew'
-            sh 'gradlew --b build.gradle clean'
+        	sh 'chmod +x ./gradlew'
+            sh './gradlew --b build.gradle clean'
         }
       }
     }
@@ -60,7 +60,7 @@ pipeline {
 
             dir("${PROJECT_PATH_BACK}")
             {
-            	sh 'gradlew --b build.gradle test'
+            	sh './gradlew --b build.gradle test'
             }
           }
         }
@@ -81,7 +81,7 @@ pipeline {
 
             dir("${PROJECT_PATH_BACK}")
             {
-                sh 'gradlew --b build.gradle build'
+                sh './gradlew --b build.gradle build'
             }
           }
      }
