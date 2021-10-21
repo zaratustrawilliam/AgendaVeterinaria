@@ -39,19 +39,33 @@ pipeline {
       }
     }
 
-    stage('Compile & Unit Tests') {
+    stage('Compile') {
       steps{
-        echo "------------>Compile & Unit Tests<------------"
+        echo "------------>Compile<------------"
         //sh 'chmod +x gradlew'
         //sh './gradlew --b ./build.gradle test'
         sh 'pwd'
 
         dir("${PROJECT_PATH_BACK}")
         {
-        	sh 'gradle build test'
+        	sh 'gradle build -x test'
         }
       }
     }
+
+    stage('Unit Test') {
+          steps{
+            echo "------------>Unit Tests<------------"
+            //sh 'chmod +x gradlew'
+            //sh './gradlew --b ./build.gradle test'
+            sh 'pwd'
+
+            dir("${PROJECT_PATH_BACK}")
+            {
+            	sh 'gradle build test'
+            }
+          }
+        }
 
     stage('Static Code Analysis') {
       steps{
@@ -62,16 +76,6 @@ pipeline {
       }
     }
 
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        //sh './gradlew --b ./build.gradle build -x test'
-        dir("${PROJECT_PATH_BACK}")
-        {
-                	sh 'gradle build -x test'
-        }
-      }
-    }
   }
 
   post {
