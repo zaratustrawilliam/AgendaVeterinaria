@@ -74,7 +74,7 @@ public class AgendaJpa {
     }
 
     public static Agenda fromAgenda(AgendaJpa agendaJpa){
-        return new Agenda(agendaJpa.getId(),MascotaJpa.fromMascota(agendaJpa.getMascota()),
+        return new Agenda(agendaJpa.getId(),MascotaJpa.fromMascotaMapper(agendaJpa.getMascota()),
                 agendaJpa.getFechaAgenda(),agendaJpa.getPrecio(),agendaJpa.getDireccionMascota());
     }
 

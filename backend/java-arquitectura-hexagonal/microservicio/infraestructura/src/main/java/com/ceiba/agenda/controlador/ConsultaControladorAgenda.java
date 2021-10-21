@@ -7,6 +7,7 @@ import com.ceiba.agenda.modelo.dto.DtoAgenda;
 import com.ceiba.agenda.modelo.dto.DtoFechasDisponibles;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -42,7 +43,8 @@ public class ConsultaControladorAgenda {
 
     @GetMapping("/disponibilidad")
     @ApiOperation("Se lista las agendas de un usuario en especifico")
-    public List<DtoFechasDisponibles> listarDisponibilidad(@RequestParam LocalDateTime fecha, @RequestParam int registros){
+    public List<DtoFechasDisponibles> listarDisponibilidad(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                                       LocalDateTime fecha, @RequestParam int registros){
         return manejadorListarAgendasDisponibles.ejecutar(fecha,registros);
     }
 }

@@ -76,4 +76,8 @@ public class MascotaJpa {
                 mascota.getUsuario() != null ? UsuarioJpa.fromUsuario(mascota.getUsuario()) : null,
                 mascota.getTipoMascota() != null ? TipoMascotaJpa.toTipoMascota(mascota.getTipoMascota()) : null);
     }
+
+    public static Mascota fromMascotaMapper(MascotaJpa mascotaJpa){
+        return new Mascota(mascotaJpa.getId());
+    }
 }

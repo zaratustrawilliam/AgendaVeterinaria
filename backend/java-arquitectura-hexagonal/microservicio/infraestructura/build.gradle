@@ -18,7 +18,7 @@ apply plugin: 'jacoco'
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = "${javaVersion}"
+sourceCompatibility = "1.8"
 
 repositories {
 	mavenCentral()
@@ -74,3 +74,4 @@ test {
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport
 }
+targetCompatibility = JavaVersion.VERSION_1_8
