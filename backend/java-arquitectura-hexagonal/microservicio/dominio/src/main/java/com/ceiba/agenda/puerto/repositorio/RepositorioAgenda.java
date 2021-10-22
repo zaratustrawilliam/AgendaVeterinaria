@@ -2,7 +2,6 @@ package com.ceiba.agenda.puerto.repositorio;
 
 import com.ceiba.agenda.modelo.entidad.Agenda;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
