@@ -58,6 +58,7 @@ class ServicioEliminarAgendaTest {
         ServicioEliminarAgenda servicioEliminarAgenda = new ServicioEliminarAgenda(repositorioAgenda);
         //act -assert
         servicioEliminarAgenda.ejecutar(idAgenda);
+        Mockito.verify(repositorioAgenda,Mockito.times(1)).eliminar(idAgenda);
     }
 
     @Test

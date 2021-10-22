@@ -4,9 +4,9 @@ import com.ceiba.mascota.modelo.entidad.Mascota;
 
 public interface RepositorioMascota {
 
-     Long crear(Mascota Mascota);
+     Long crear(Mascota mascota);
 
-     void actualizar(Mascota Mascota);
+     void actualizar(Mascota mascota);
 
      void eliminar(Long id);
 
