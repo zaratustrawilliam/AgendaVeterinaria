@@ -47,6 +47,19 @@ public class ConsultaControladorAgendaTest {
     }
 
     @Test
+    @DisplayName("Deberia listar las agendas por usuario")
+    void deberiaListarAgendasPorUsuario() throws Exception {
+        // arrange
+        Long idusuario = 1L;
+        // act - assert
+        mocMvc.perform(get("/agendas/{idUsuario}",idusuario)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id",is(1)));
+    }
+
+    @Test
     @DisplayName("Deberia listar las agendas")
     void deberiaListarAgendas() throws Exception {
         // arrange

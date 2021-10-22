@@ -61,7 +61,9 @@ public class DaoAgendaJpa implements DaoAgenda {
                    .map(LocalDateTime::getHour)
                    .collect(Collectors.toList());
            for(int i = 7; i < 16 ;i++){
-               if(contadorEspacios == cantidadEspacios)break;
+               if(contadorEspacios == cantidadEspacios){
+                   break;
+               }
                if(!listaConsulta.contains(i)){
                    listaSalida.add(new DtoFechasDisponibles()
                            .buildCita(generarFechaDisponible(fechaInicial,i)));

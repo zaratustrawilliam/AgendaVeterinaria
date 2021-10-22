@@ -43,8 +43,12 @@ public class RepositorioMascotaJpa implements RepositorioMascota {
         try{
             Long identificadorMascota = impMascotaJpaRepository.
                     buscarPorNombreMascotaUsuarioId(nombreMascota,idUsuario);
-            if(identificadorMascota != null)salida = Boolean.TRUE;
-        }catch(NoResultException | NonUniqueResultException ex){ex.printStackTrace();}
+            if(identificadorMascota != null){
+                salida = Boolean.TRUE;
+            }
+        }catch(NoResultException | NonUniqueResultException ex){
+            ex.printStackTrace();
+        }
         return salida;
     }
 

@@ -95,7 +95,46 @@ class AgendaTest {
     }
 
     @Test
-    @DisplayName("Deberia fallar cuando la fecha de la agenda esta fuera del horario laboral")
+    @DisplayName("Deberia fallar cuando la fecha de la agenda es de un anio anterior a la actual")
+    void deberiaFallarFechaErroneaAnioAnterior(){
+        //arrange-act
+        LocalDateTime localDateTime = LocalDateTime.now().minusYears(1);
+        AgendaTestDataBuilder agendaTestDataBuilder = new AgendaTestDataBuilder()
+                .conFechaAgenda(localDateTime);
+        //assert
+        BasePrueba.assertThrows(()->{
+            agendaTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class,"La fecha a agenda es menor a la fecha actual, eso es invalido");
+    }
+
+    @Test
+    @DisplayName("Deberia fallar cuando la fecha de la agenda es de un mes anterior a la actual")
+    void deberiaFallarFechaErroneaMesAnterior(){
+        //arrange-act
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(40);
+        AgendaTestDataBuilder agendaTestDataBuilder = new AgendaTestDataBuilder()
+                .conFechaAgenda(localDateTime);
+        //assert
+        BasePrueba.assertThrows(()->{
+            agendaTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class,"La fecha a agenda es menor a la fecha actual, eso es invalido");
+    }
+    @Test
+    @DisplayName("Deberia fallar cuando la fecha de la agenda es de unas horas de anterioridad a la actual")
+    void deberiaFallarFechaErroneaHorasAnterior(){
+        //arrange-act
+        LocalDateTime localDateTime = LocalDateTime.now().minusHours(1);
+        AgendaTestDataBuilder agendaTestDataBuilder = new AgendaTestDataBuilder()
+                .conFechaAgenda(localDateTime);
+        //assert
+        BasePrueba.assertThrows(()->{
+            agendaTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class,"La fecha a agenda es menor a la fecha actual, eso es invalido");
+    }
+
+
+    @Test
+    @DisplayName("Deberia fallar cuando la fecha de la agenda esta fuera del horario laboral, por debajo de la hora")
     void deberiaFallarFechaFueraHorarioLaboral(){
         //arrange-act
         LocalDateTime localDateTime = LocalDateTime.of(2021, Month.DECEMBER,1,6,0);
@@ -105,5 +144,52 @@ class AgendaTest {
         BasePrueba.assertThrows(()->{
             agendaTestDataBuilder.build();
         }, ExcepcionValorInvalido.class,"La agenda se debe hacer dentro del horario de trabajo");
+    }
+
+    @Test
+    @DisplayName("Deberia fallar cuando la fecha de la agenda esta fuera del horario laboral, por encima de la hora")
+    void deberiaFallarFechaFueraHorarioLaboralMayor(){
+        //arrange-act
+        LocalDateTime localDateTime = LocalDateTime.of(2021, Month.DECEMBER,1,20,0);
+        AgendaTestDataBuilder agendaTestDataBuilder = new AgendaTestDataBuilder()
+                .conFechaAgenda(localDateTime);
+        //assert
+        BasePrueba.assertThrows(()->{
+            agendaTestDataBuilder.build();
+        }, ExcepcionValorInvalido.class,"La agenda se debe hacer dentro del horario de trabajo");
+    }
+
+    @Test
+    @DisplayName("Agregar Multa a valor sin inicializar")
+    void deberiaLanzarExcepcionValorInvalidoPrecio(){
+        //assert
+        TipoMascota tipoMascota = new TipoMascotaTestDataBuilder()
+                .aplicarTipoPerro()
+                .build();
+
+        Usuario usuario = new UsuarioTestDataBuilder()
+                .conNombre("Carlos")
+                .conId(1L)
+                .build();
+
+        Mascota mascota = new MascotaTestDataBuilder()
+                .conId(1L)
+                .conTipoMascota(tipoMascota)
+                .conUsuario(usuario)
+                .build();
+
+        LocalDateTime fechaCreacion = LocalDateTime.of(2021, Month.DECEMBER, 8, 8, 0);
+        Agenda agenda = new AgendaTestDataBuilder()
+                .conMascota(mascota)
+                .conId(10L)
+                .conDireccionMascota("Bulevar Cable")
+                .conFechaAgenda(fechaCreacion)
+                .conPrecio(null)
+                .build();
+
+        //act - assert
+        BasePrueba.assertThrows(()->{
+            agenda.agregarValorMultaTrasladoCita();
+        }, ExcepcionValorInvalido.class,"Se tiene un valor invalido para el precio");
     }
 }

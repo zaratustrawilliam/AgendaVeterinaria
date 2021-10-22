@@ -28,8 +28,7 @@ public class ServicioActualizarAgenda {
 
         Agenda agendaAnterior = repositorioAgenda.buscarPorId(agenda.getId());
 
-        if ((agenda.getDireccionMascota() != null && !agenda.getDireccionMascota().isEmpty()
-                && agendaAnterior.getDireccionMascota() != null && !agendaAnterior.getDireccionMascota().isEmpty()) &&
+        if ((validarAgenda(agenda) && validarAgenda(agendaAnterior)) &&
                 (agenda.getFechaAgenda().getDayOfWeek() == agendaAnterior.getFechaAgenda().getDayOfWeek())) {
             agenda.ingresarValorAgenda(agendaAnterior.getPrecio());
         } else {
@@ -48,6 +47,10 @@ public class ServicioActualizarAgenda {
 
         }
         repositorioAgenda.actualizar(completarInstancias(agenda));
+    }
+
+    private boolean validarAgenda(Agenda agenda){
+        return agenda.getDireccionMascota() != null && !agenda.getDireccionMascota().isEmpty();
     }
 
     private void validarExistenciaAgemda(Long idAgenda) {

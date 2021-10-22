@@ -42,8 +42,12 @@ public class RepositorioUsuarioJPA  implements RepositorioUsuario{
         boolean salida = Boolean.FALSE;
         try{
             UsuarioJpa usuarioJpa = repositorio.findByNombre(nombre);
-            if(usuarioJpa != null)salida = Boolean.TRUE;
-        }catch(NoResultException | NonUniqueResultException nr){nr.printStackTrace();}
+            if(usuarioJpa != null){
+                salida = Boolean.TRUE;
+            }
+        }catch(NoResultException | NonUniqueResultException nr){
+            nr.printStackTrace();
+        }
         return salida;
     }
 

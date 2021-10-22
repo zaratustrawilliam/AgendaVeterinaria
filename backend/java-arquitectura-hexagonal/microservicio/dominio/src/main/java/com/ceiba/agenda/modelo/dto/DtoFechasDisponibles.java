@@ -17,13 +17,13 @@ public class DtoFechasDisponibles {
     private String anio;
     private String hora;
 
-    private static final String colon = ":";
+    private static final String COLON = ":";
 
     public DtoFechasDisponibles buildCita(LocalDateTime fechaCita){
 
         StringBuilder builderHora = new StringBuilder();
         builderHora.append(fechaCita.getHour());
-        builderHora.append(colon);
+        builderHora.append(COLON);
         builderHora.append(fechaCita.getMinute());
 
         return new DtoFechasDisponibles(String.valueOf(fechaCita.getDayOfMonth()),
