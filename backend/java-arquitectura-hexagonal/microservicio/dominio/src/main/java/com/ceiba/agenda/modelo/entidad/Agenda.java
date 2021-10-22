@@ -105,7 +105,7 @@ public class Agenda {
     }
 
     public void eliminarMinutosFechaAgenda(){
-        this.fechaAgenda.withMinute(0).withSecond(0);
+        this.fechaAgenda = fechaAgenda.withMinute(0).withSecond(0).withNano(0);
     }
 
     public void ingresarValorAgenda(BigDecimal valor){

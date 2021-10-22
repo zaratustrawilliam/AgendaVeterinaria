@@ -303,9 +303,10 @@ class ServicioCrearAgendaTest {
     private LocalDateTime debeSerDomingo(LocalDateTime fechaAgenda){
         do{
             if(!fechaAgenda.getDayOfWeek().equals(DayOfWeek.SUNDAY)){
-                fechaAgenda.plusDays(1);
+                fechaAgenda = fechaAgenda.plusDays(1);
             }
-        }while(fechaAgenda.getDayOfWeek().equals(DayOfWeek.SUNDAY));
+        }while(!fechaAgenda.getDayOfWeek().equals(DayOfWeek.SUNDAY));
+        System.out.println(fechaAgenda.toString());
         return fechaAgenda;
     }
 }
