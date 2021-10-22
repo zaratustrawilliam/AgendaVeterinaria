@@ -30,10 +30,10 @@ public class DaoTipoMascotaJpa implements DaoTipoMascota {
         if(!resultados.isEmpty()){
             return resultados.stream()
                     .map(TipoMascotaJpa::fromTipoMascota)
-                    .toList()
+                    .collect(Collectors.toList())
                     .stream()
                     .map(DtoTipoMascota::fromTipoMascotaDto)
-                    .toList();
+                    .collect(Collectors.toList());
         }else {
             return new ArrayList<>();
         }

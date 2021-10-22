@@ -30,10 +30,10 @@ public class DaoUsuarioJpa implements DaoUsuario {
             return resultados
                     .stream()
                     .map(UsuarioJpa::toUsuario)
-                    .toList()
+                    .collect(Collectors.toList())
                     .stream()
                     .map(DtoUsuario::usuarioToDto)
-                    .toList();
+                    .collect(Collectors.toList());
         }else {
             return new ArrayList<>();
         }

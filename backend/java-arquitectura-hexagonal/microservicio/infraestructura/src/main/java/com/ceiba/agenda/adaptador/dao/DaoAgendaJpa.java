@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DaoAgendaJpa implements DaoAgenda {
@@ -26,10 +27,10 @@ public class DaoAgendaJpa implements DaoAgenda {
         return impAgendaJpaRepository.findAll()
                 .stream()
                 .map(AgendaJpa::fromAgenda)
-                .toList()
+                .collect(Collectors.toList())
                 .stream()
                 .map(DtoAgenda::fromDtoAgenda)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -37,10 +38,10 @@ public class DaoAgendaJpa implements DaoAgenda {
         return impAgendaJpaRepository.findByUsuarioById(idUsuario)
                 .stream()
                 .map(AgendaJpa::fromAgenda)
-                .toList()
+                .collect(Collectors.toList())
                 .stream()
                 .map(DtoAgenda::fromDtoAgenda)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -52,13 +53,13 @@ public class DaoAgendaJpa implements DaoAgenda {
                    .buscarAgendasEntreFechas(fechaInicial(fechaInicial),fechaFinal(fechaInicial))
                    .stream()
                    .map(AgendaJpa::fromAgenda)
-                   .toList()
+                   .collect(Collectors.toList())
                    .stream()
                    .map(Agenda::getFechaAgenda)
-                   .toList()
+                   .collect(Collectors.toList())
                    .stream()
                    .map(LocalDateTime::getHour)
-                   .toList();
+                   .collect(Collectors.toList());
            for(int i = 7; i < 16 ;i++){
                if(contadorEspacios == cantidadEspacios)break;
                if(!listaConsulta.contains(i)){

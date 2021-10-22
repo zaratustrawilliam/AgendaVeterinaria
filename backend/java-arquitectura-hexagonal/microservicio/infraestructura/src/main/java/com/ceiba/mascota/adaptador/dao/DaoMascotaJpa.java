@@ -29,10 +29,10 @@ public class DaoMascotaJpa implements DaoMascota {
         if(!resultado.isEmpty()){
             return resultado.stream()
                     .map(MascotaJpa::fromMascota)
-                    .toList()
+                    .collect(Collectors.toList())
                     .stream()
                     .map(DtoMascota::fromDtoMascota)
-                    .toList();
+                    .collect(Collectors.toList());
         }else return new ArrayList<>();
     }
 
@@ -42,10 +42,10 @@ public class DaoMascotaJpa implements DaoMascota {
         if(!resultado.isEmpty()){
             return resultado.stream()
                     .map(MascotaJpa::fromMascota)
-                    .toList()
+                    .collect(Collectors.toList())
                     .stream()
                     .map(DtoMascota::fromDtoMascota)
-                    .toList();
+                    .collect(Collectors.toList());
         }else return new ArrayList<>();
     }
 }

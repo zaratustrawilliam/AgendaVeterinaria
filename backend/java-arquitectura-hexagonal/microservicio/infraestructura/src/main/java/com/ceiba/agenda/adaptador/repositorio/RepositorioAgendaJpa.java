@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @ConditionalOnProperty(value = "persistencia.type", havingValue = "jpa")
@@ -51,6 +52,6 @@ public class RepositorioAgendaJpa implements RepositorioAgenda {
                 .buscarAgendasEntreFechas(fechaInicio,fechaFin)
                 .stream()
                 .map(AgendaJpa::fromAgenda)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

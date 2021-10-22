@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GeneradorDiasFestivos {
 
@@ -45,7 +46,7 @@ public class GeneradorDiasFestivos {
     public static List<Integer> daysToDaysOfYear(List<LocalDateTime> dias){
         return dias.stream()
                 .map(LocalDateTime::getDayOfYear)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private static LocalDateTime ajustar(LocalDateTime fechaAjustable){
