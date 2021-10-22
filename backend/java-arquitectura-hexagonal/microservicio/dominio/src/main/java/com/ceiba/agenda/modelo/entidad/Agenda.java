@@ -52,14 +52,22 @@ public class Agenda {
     }
 
     private void validarMenor(LocalDateTime fechaAgenda){
-        if(fechaAgenda.getYear() < LocalDateTime.now().getYear() || (
-                fechaAgenda.getYear() == LocalDateTime.now().getYear() &&
-                fechaAgenda.getDayOfYear() < LocalDateTime.now().getDayOfYear()) ||
-                (fechaAgenda.getYear() == LocalDateTime.now().getYear() &&
-                        fechaAgenda.getDayOfYear() == LocalDateTime.now().getDayOfYear() &&
-                        fechaAgenda.getHour() < LocalDateTime.now().plusHours(1).getHour())){
+        if(fechaAgenda.getYear() < LocalDateTime.now().getYear() ||
+                (validarMes(fechaAgenda)) ||
+                (validarDia(fechaAgenda))){
             throw new ExcepcionValorInvalido(FECHA_AGENDA_DIA_MENOR);
         }
+    }
+
+    private boolean validarMes(LocalDateTime fechaAgenda){
+        return fechaAgenda.getYear() == LocalDateTime.now().getYear() &&
+                        fechaAgenda.getDayOfYear() < LocalDateTime.now().getDayOfYear();
+    }
+
+    private boolean validarDia(LocalDateTime fechaAgenda){
+        return fechaAgenda.getYear() == LocalDateTime.now().getYear() &&
+                fechaAgenda.getDayOfYear() == LocalDateTime.now().getDayOfYear() &&
+                fechaAgenda.getHour() < LocalDateTime.now().plusHours(1).getHour();
     }
 
     private void validarHorarioLaboral(LocalDateTime fechaAgenda){
@@ -97,7 +105,7 @@ public class Agenda {
     }
 
     public void eliminarMinutosFechaAgenda(){
-        this.fechaAgenda.withMinute(0).withSecond(0).withNano(0);
+        this.fechaAgenda.withMinute(0).withSecond(0);
     }
 
     public void ingresarValorAgenda(BigDecimal valor){
