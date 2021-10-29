@@ -48,6 +48,10 @@ public class DaoAgendaJpa implements DaoAgenda {
     public List<DtoFechasDisponibles> listarAgendaLibre(LocalDateTime fechaInicial, int cantidadEspacios) {
        int contadorEspacios = 0;
        List<DtoFechasDisponibles> listaSalida = new ArrayList<>();
+       int horaInicial = 7;
+       if(validarFechaHoy(fechaInicial)){
+           horaInicial = fechaInicial.getHour() + 1;
+       }
        do{
            List<Integer> listaConsulta = impAgendaJpaRepository
                    .buscarAgendasEntreFechas(fechaInicial(fechaInicial),fechaFinal(fechaInicial))
@@ -60,7 +64,7 @@ public class DaoAgendaJpa implements DaoAgenda {
                    .stream()
                    .map(LocalDateTime::getHour)
                    .collect(Collectors.toList());
-           for(int i = 7; i < 16 ;i++){
+           for(int i = horaInicial; i < 16 ;i++){
                if(contadorEspacios == cantidadEspacios){
                    break;
                }
@@ -71,6 +75,7 @@ public class DaoAgendaJpa implements DaoAgenda {
                }
            }
            fechaInicial = fechaInicial.plusDays(1);
+           horaInicial = 7;
        }while(contadorEspacios < cantidadEspacios);
 
         return listaSalida;
@@ -99,4 +104,12 @@ public class DaoAgendaJpa implements DaoAgenda {
                 hora,
                 0);
     }
+
+    private boolean validarFechaHoy(LocalDateTime fecha){
+        LocalDateTime actual = LocalDateTime.now();
+        return fecha.getYear() == actual.getYear() &&
+                fecha.getMonth() == actual.getMonth() &&
+                fecha.getDayOfMonth() == actual.getDayOfMonth();
+    }
+
 }

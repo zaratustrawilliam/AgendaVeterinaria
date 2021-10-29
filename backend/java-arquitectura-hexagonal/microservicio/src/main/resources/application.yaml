@@ -22,7 +22,7 @@ spring:
       #driverClassName: org.h2.Driver
       type: com.zaxxer.hikari.HikariDataSource
       driver-class-name: org.h2.Driver
-      jdbcUrl: jdbc:h2:file:~/ADNCEIBAV1_7
+      jdbcUrl: jdbc:h2:file:~/ADNCEIBAV1_10
       hikari:
          poolName: pool
    jpa:

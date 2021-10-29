@@ -39,11 +39,24 @@ class ConsultaControladorUsuarioTest {
         // arrange
         // act - assert
         mocMvc.perform(get("/usuarios")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].nombre", is("test")))
                 .andExpect(jsonPath("$[0].id", is(1)));
+
+    }
+
+    @Test
+    @DisplayName("Deberia traer un usuario segun su id")
+    void deberiaExtraerUsuario() throws Exception {
+        // arrange
+        // act - assert
+        mocMvc.perform(get("/usuarios/{idUsuario}",1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombre", is("test")))
+                .andExpect(jsonPath("$.id", is(1)));
 
     }
 

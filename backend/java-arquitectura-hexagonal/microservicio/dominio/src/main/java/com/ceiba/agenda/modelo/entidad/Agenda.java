@@ -51,6 +51,15 @@ public class Agenda {
         this.id=id;
     }
 
+    public Agenda(Long id, Mascota mascota, LocalDateTime fechaAgenda, BigDecimal precio, String direccionMascota,boolean mapper) {
+
+        this.id = id;
+        this.mascota = mascota;
+        this.fechaAgenda = fechaAgenda;
+        this.precio = precio;
+        this.direccionMascota = direccionMascota;
+    }
+
     private void validarMenor(LocalDateTime fechaAgenda){
         if(fechaAgenda.getYear() < LocalDateTime.now().getYear() ||
                 (validarMes(fechaAgenda)) ||

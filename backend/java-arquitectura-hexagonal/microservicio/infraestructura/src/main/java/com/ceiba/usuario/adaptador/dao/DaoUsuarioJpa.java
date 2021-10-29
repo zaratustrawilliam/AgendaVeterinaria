@@ -39,4 +39,10 @@ public class DaoUsuarioJpa implements DaoUsuario {
         }
 
     }
+
+    @Override
+    public DtoUsuario buscarPorId(Long idUsuario) {
+        return DtoUsuario.usuarioToDto(
+                UsuarioJpa.toUsuario(repositorio.findById(idUsuario).get()));
+    }
 }

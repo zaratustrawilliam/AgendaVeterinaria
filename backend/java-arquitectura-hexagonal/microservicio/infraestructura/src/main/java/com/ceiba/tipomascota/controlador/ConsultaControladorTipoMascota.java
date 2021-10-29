@@ -4,6 +4,7 @@ import com.ceiba.tipomascota.consulta.ManejadorListaTipoMascota;
 import com.ceiba.tipomascota.modelo.dto.DtoTipoMascota;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/tiposmascotas")
 @Api(tags = {"Controlador consulta tipos mascotas"})
 public class ConsultaControladorTipoMascota {

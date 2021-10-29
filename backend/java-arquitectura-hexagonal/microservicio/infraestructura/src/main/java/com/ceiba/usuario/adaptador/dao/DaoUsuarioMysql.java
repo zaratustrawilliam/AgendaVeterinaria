@@ -28,4 +28,9 @@ public class DaoUsuarioMysql implements DaoUsuario {
     public List<DtoUsuario> listar() {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoUsuario());
     }
+
+    @Override
+    public DtoUsuario buscarPorId(Long idUsuario) {
+        return null;
+    }
 }

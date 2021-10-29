@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.ceiba.usuario.comando.ComandoUsuario;
 
+import java.time.LocalDateTime;
+
 @Component
 public class FabricaUsuario {
 
@@ -13,7 +15,8 @@ public class FabricaUsuario {
                 comandoUsuario.getId(),
                 comandoUsuario.getNombre(),
                 comandoUsuario.getClave(),
-                comandoUsuario.getFecha()
+                comandoUsuario.getFecha() != null ?
+                        comandoUsuario.getFecha(): LocalDateTime.now()
         );
     }
 

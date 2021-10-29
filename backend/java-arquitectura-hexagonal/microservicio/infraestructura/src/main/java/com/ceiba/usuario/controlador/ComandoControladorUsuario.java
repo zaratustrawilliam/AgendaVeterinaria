@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/usuarios")
 @Api(tags = { "Controlador comando usuario"})
 public class ComandoControladorUsuario {

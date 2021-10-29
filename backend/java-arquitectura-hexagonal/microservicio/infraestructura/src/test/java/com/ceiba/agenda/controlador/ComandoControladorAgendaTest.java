@@ -77,7 +77,21 @@ class ComandoControladorAgendaTest {
     @DisplayName("Deberia eliminar una agenda")
     void deberiaEliminarUnaAgenda() throws Exception {
         // arrange
-        Long idAgenda = 1L;
+
+        ComandoAgenda comandoAgenda =  new ComandoAgendaTestDataBuilder()
+                .conMascota(1L)
+                .conFechaAgenda(LocalDateTime.of(2022, Month.JANUARY,1,9,0))
+                .conDireccionMascota(null)
+                .conPrecio(null)
+                .build();
+
+        mocMvc.perform(post("/agendas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(comandoAgenda)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'valor': 2}"));
+
+        Long idAgenda = 2L;
         // act - assert
         mocMvc.perform(delete("/agendas/{idAgenda}",idAgenda)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,6 +101,6 @@ class ComandoControladorAgendaTest {
         mocMvc.perform(get("/agendas")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$", hasSize(1)));
     }
 }

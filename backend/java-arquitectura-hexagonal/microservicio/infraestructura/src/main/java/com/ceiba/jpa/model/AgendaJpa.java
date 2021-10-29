@@ -19,8 +19,10 @@ public class AgendaJpa {
     @ManyToOne(optional = false,cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
     @JoinColumn(name = "idmascota")
     private MascotaJpa mascota;
+    @Column(name="fecha_agenda")
     private LocalDateTime fechaAgenda;
     private BigDecimal precio;
+    @Column(name = "direccion_mascota")
     private String direccionMascota;
 
     public Long getId() {
@@ -75,7 +77,7 @@ public class AgendaJpa {
 
     public static Agenda fromAgenda(AgendaJpa agendaJpa){
         return new Agenda(agendaJpa.getId(),MascotaJpa.fromMascotaMapper(agendaJpa.getMascota()),
-                agendaJpa.getFechaAgenda(),agendaJpa.getPrecio(),agendaJpa.getDireccionMascota());
+                agendaJpa.getFechaAgenda(),agendaJpa.getPrecio(),agendaJpa.getDireccionMascota(),Boolean.TRUE);
     }
 
     public static AgendaJpa toAgenda(Agenda agenda){

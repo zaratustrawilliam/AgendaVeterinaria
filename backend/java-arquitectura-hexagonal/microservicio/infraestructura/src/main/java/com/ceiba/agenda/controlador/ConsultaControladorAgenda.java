@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/agendas")
 @Api(tags={"Controlador consulta agenda"})
 public class ConsultaControladorAgenda {
