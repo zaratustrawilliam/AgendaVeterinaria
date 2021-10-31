@@ -273,7 +273,6 @@ class ServicioActualizarAgendaTest {
         Agenda agenda = new AgendaTestDataBuilder()
                 .conMascota(mascota)
                 .conId(10L)
-                .conPrecio(new BigDecimal(25000))
                 .conDireccionMascota("San Judas")
                 .conFechaAgenda(fechaCreacion)
                 .build();
@@ -286,6 +285,7 @@ class ServicioActualizarAgendaTest {
                 .build();
 
         agendaAnterior.calcularPrecio();
+        agenda.calcularPrecio();
 
         RepositorioAgenda repositorioAgenda = Mockito.mock(RepositorioAgenda.class);
         Mockito.when(repositorioAgenda.agendasEntreFechas(Mockito.any(LocalDateTime.class),
@@ -302,7 +302,7 @@ class ServicioActualizarAgendaTest {
         servicioActualizarAgenda.ejecutar(agenda);
         BigDecimal diferenciaPrecios = agenda.getPrecio().subtract(agendaAnterior.getPrecio()).abs();
         //assert
-        assertEquals(diferenciaPrecios.compareTo(new BigDecimal(10000)) >= 0, true);
+        assertEquals(diferenciaPrecios.compareTo(new BigDecimal(7000)) >= 0, true);
         Mockito.verify(repositorioAgenda, Mockito.times(1)).actualizar(Mockito.any());
     }
 
