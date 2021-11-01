@@ -40,14 +40,10 @@ public class RepositorioMascotaJpa implements RepositorioMascota {
     @Override
     public boolean existePorUsuarioNombreMascota(Long idUsuario, String nombreMascota) {
         boolean salida = Boolean.FALSE;
-        try{
-            Long identificadorMascota = impMascotaJpaRepository.
-                    buscarPorNombreMascotaUsuarioId(nombreMascota,idUsuario);
-            if(identificadorMascota != null){
-                salida = Boolean.TRUE;
-            }
-        }catch(NoResultException | NonUniqueResultException ex){
-            ex.printStackTrace();
+
+        Long identificadorMascota = impMascotaJpaRepository.buscarPorNombreMascotaUsuarioId(nombreMascota,idUsuario);
+        if(identificadorMascota != null){
+            salida = Boolean.TRUE;
         }
         return salida;
     }

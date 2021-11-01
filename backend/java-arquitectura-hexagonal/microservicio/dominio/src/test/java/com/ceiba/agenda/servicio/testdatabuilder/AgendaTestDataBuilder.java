@@ -47,4 +47,8 @@ public class AgendaTestDataBuilder {
     public Agenda build(){
         return new Agenda(id,mascota,fechaAgenda,precio,direccionMascota);
     }
+
+    public Agenda build(boolean mapper){
+        return new Agenda(id,mascota,fechaAgenda,precio,direccionMascota,mapper);
+    }
 }

@@ -192,4 +192,72 @@ class AgendaTest {
             agenda.agregarValorMultaTrasladoCita();
         }, ExcepcionValorInvalido.class,"Se tiene un valor invalido para el precio");
     }
+
+    @Test
+    @DisplayName("Se prueba el constructor para los mappers")
+    void deberiaCrerAgendaSinValidadores(){
+        //arrange
+        TipoMascota tipoMascota = new TipoMascotaTestDataBuilder()
+                .aplicarTipoPerro()
+                .build();
+
+        Usuario usuario = new UsuarioTestDataBuilder()
+                .conNombre("Carlos")
+                .conId(1L)
+                .build();
+
+        Mascota mascota = new MascotaTestDataBuilder()
+                .conId(1L)
+                .conTipoMascota(tipoMascota)
+                .conUsuario(usuario)
+                .build();
+
+        LocalDateTime fechaCreacion = LocalDateTime.of(2021, Month.DECEMBER, 8, 8, 0);
+        //act
+        Agenda agenda = new AgendaTestDataBuilder()
+                .conMascota(mascota)
+                .conId(10L)
+                .conDireccionMascota("Bulevar Cable")
+                .conFechaAgenda(fechaCreacion)
+                .build(true);
+        //assert
+        assertEquals(10L,agenda.getId());
+        assertEquals("Bulevar Cable",agenda.getDireccionMascota());
+        assertEquals(fechaCreacion,agenda.getFechaAgenda());
+        assertEquals(mascota.getId(),agenda.getMascota().getId());
+    }
+
+    @Test
+    @DisplayName("Se prueba el constructor para los mappers, solo referencia")
+    void deberiaCrerAgendaSinValidadoresSoloReferncia(){
+        //arrange
+        TipoMascota tipoMascota = new TipoMascotaTestDataBuilder()
+                .aplicarTipoPerro()
+                .build();
+
+        Usuario usuario = new UsuarioTestDataBuilder()
+                .conNombre("Carlos")
+                .conId(1L)
+                .build();
+
+        Mascota mascota = new MascotaTestDataBuilder()
+                .conId(1L)
+                .conTipoMascota(tipoMascota)
+                .conUsuario(usuario)
+                .build();
+
+        LocalDateTime fechaCreacion = LocalDateTime.of(2021, Month.DECEMBER, 8, 8, 0);
+        //act
+        Agenda agenda = new AgendaTestDataBuilder()
+                .conMascota(mascota)
+                .conId(10L)
+                .conDireccionMascota("Bulevar Cable")
+                .conFechaAgenda(fechaCreacion)
+                .build(false);
+        //assert
+        assertEquals(10L,agenda.getId());
+        assertEquals(null,agenda.getDireccionMascota());
+        assertEquals(null,agenda.getFechaAgenda());
+        assertEquals(null,agenda.getMascota());
+    }
 }
