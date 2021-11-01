@@ -50,6 +50,24 @@ class ComandoControladorMascotaTest {
     }
 
     @Test
+    @DisplayName("No Deberia crear una mascota, dado que ya existe")
+    void NodeberiaCrearUnaMascota() throws Exception{
+        // arrange
+        ComandoMascota mascota = new ComandoMascotaTestDataBuilder()
+                .conNombre("anibal")
+                .conUsuario(1L)
+                .conTipoMascota(2L)
+                .build();
+        // act - assert
+        mocMvc.perform(post("/mascotas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mascota)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{'nombreExcepcion': 'ExcepcionDuplicidad'}"))
+                .andExpect(content().json("{'mensaje': 'El mascota ya existe en el sistema'}"));
+    }
+
+    @Test
     @DisplayName("Deberia actualizar una mascota")
     void deberiaActualizarUnaMascota() throws Exception{
         // arrange

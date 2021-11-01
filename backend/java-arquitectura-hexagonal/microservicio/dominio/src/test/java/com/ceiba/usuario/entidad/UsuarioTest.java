@@ -76,5 +76,33 @@ class UsuarioTest {
                 ExcepcionValorObligatorio.class, "Se debe ingresar la fecha de creación");
     }
 
+    @Test
+    @DisplayName("Constructor mapper sin validaciones de usuario, se usa para unidades ya persistidas")
+    void deberiaFuncionarElContructorMapper(){
+            // arrange
+            LocalDateTime fechaCreacion = LocalDateTime.now();
+            //act
+            Usuario usuario = new UsuarioTestDataBuilder().conFechaCreacion(fechaCreacion).conId(1L).build(true);
+            //assert
+            assertEquals(1, usuario.getId());
+            assertEquals("1234", usuario.getNombre());
+            assertEquals("1234", usuario.getClave());
+            assertEquals(fechaCreacion, usuario.getFechaCreacion());
+    }
+
+    @Test
+    @DisplayName("Constructor mapper sin validaciones de usuario, se usa para unidades ya persistidas")
+    void deberiaFuncionarElContructorMapperCaseFalse(){
+        // arrange
+        LocalDateTime fechaCreacion = LocalDateTime.now();
+        //act
+        Usuario usuario = new UsuarioTestDataBuilder().conFechaCreacion(fechaCreacion).conId(1L).build(false);
+        //assert
+        assertEquals(1, usuario.getId());
+        assertEquals(null, usuario.getNombre());
+        assertEquals(null, usuario.getClave());
+        assertEquals(null, usuario.getFechaCreacion());
+    }
+
 
 }

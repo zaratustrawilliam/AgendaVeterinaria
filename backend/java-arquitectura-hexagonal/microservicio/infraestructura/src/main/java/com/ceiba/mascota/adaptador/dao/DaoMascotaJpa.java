@@ -26,14 +26,12 @@ public class DaoMascotaJpa implements DaoMascota {
     @Override
     public List<DtoMascota> listar() {
         List<MascotaJpa> resultado =  impMascotaJpaRepository.findAll();
-        if(!resultado.isEmpty()){
-            return resultado.stream()
+        return resultado.stream()
                     .map(MascotaJpa::fromMascota)
                     .collect(Collectors.toList())
                     .stream()
                     .map(DtoMascota::fromDtoMascota)
                     .collect(Collectors.toList());
-        }else return new ArrayList<>();
     }
 
     @Override

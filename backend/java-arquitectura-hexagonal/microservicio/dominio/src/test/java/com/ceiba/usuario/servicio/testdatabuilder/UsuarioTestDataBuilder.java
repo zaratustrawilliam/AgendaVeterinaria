@@ -40,4 +40,6 @@ public class UsuarioTestDataBuilder {
     public Usuario build() {
         return new Usuario(id,nombreUsuario, clave,fecha);
     }
+
+    public Usuario build(boolean mapper){ return new Usuario(id,nombreUsuario, clave,fecha,mapper);}
 }

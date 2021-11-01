@@ -45,6 +45,20 @@ class ComandoControladorUsuarioTest {
     }
 
     @Test
+    @DisplayName("No Deberia crear un usuario, ya existe")
+    void noDeberiaCrearUnUsuario() throws Exception{
+        // arrange
+        ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().conNombre("test").build();
+        // act - assert
+        mocMvc.perform(post("/usuarios")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuario)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("{'nombreExcepcion': 'ExcepcionDuplicidad'}"))
+                .andExpect(content().json("{'mensaje': 'El usuario ya existe en el sistema'}"));
+    }
+
+    @Test
     @DisplayName("Deberia actualizar un usuario")
     void deberiaActualizarUnUsuario() throws Exception{
         // arrange

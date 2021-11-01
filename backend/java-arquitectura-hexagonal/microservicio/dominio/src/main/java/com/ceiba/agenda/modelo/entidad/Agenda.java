@@ -54,10 +54,12 @@ public class Agenda {
     public Agenda(Long id, Mascota mascota, LocalDateTime fechaAgenda, BigDecimal precio, String direccionMascota,boolean mapper) {
 
         this.id = id;
-        this.mascota = mascota;
-        this.fechaAgenda = fechaAgenda;
-        this.precio = precio;
-        this.direccionMascota = direccionMascota;
+        if(mapper){
+            this.mascota = mascota;
+            this.fechaAgenda = fechaAgenda;
+            this.precio = precio;
+            this.direccionMascota = direccionMascota;
+        }
     }
 
     private void validarMenor(LocalDateTime fechaAgenda){
