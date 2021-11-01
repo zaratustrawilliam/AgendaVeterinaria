@@ -37,13 +37,11 @@ public class DaoMascotaJpa implements DaoMascota {
     @Override
     public List<DtoMascota> listarPorUsuario(Long idUsuario) {
         List<MascotaJpa> resultado = impMascotaJpaRepository.listarPorUsuario(idUsuario);
-        if(!resultado.isEmpty()){
             return resultado.stream()
                     .map(MascotaJpa::fromMascota)
                     .collect(Collectors.toList())
                     .stream()
                     .map(DtoMascota::fromDtoMascota)
                     .collect(Collectors.toList());
-        }else return new ArrayList<>();
     }
 }

@@ -27,15 +27,11 @@ public class DaoTipoMascotaJpa implements DaoTipoMascota {
     @Override
     public List<DtoTipoMascota> listar() {
         List<TipoMascotaJpa> resultados = repository.findAll();
-        if(!resultados.isEmpty()){
             return resultados.stream()
                     .map(TipoMascotaJpa::fromTipoMascota)
                     .collect(Collectors.toList())
                     .stream()
                     .map(DtoTipoMascota::fromTipoMascotaDto)
                     .collect(Collectors.toList());
-        }else {
-            return new ArrayList<>();
-        }
     }
 }
